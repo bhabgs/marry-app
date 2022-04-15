@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <image src='/images/map/di.png' class='cover' mode='aspectFill'></image>
+  <view class='dateArea'>
+    <text class="text-data">
+      2022-05-05
+    </text>
+    <text class="text-data-timeend">倒计时：{{dds}}</text>
+  </view>
+  <view class="mapArea">
+    <text class="text-data1">
+      天津市宁河区芦台春生态园-桃花厅
+    </text>
+  <view class="redtop"></view>
+  <!-- <view class="mapdetail"> -->
+  <map class="mapdetail" longitude="{{lng}}" latitude="{{lat}}" scale="18" controls="{{controls}}" markers="{{markers}}" bindmarkertap="markertap" show-location ></map>
+  <!-- </view> -->
+  <view class="redbottom"></view>
+  </view>
+</view>
