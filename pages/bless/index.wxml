@@ -1,17 +1,22 @@
 <!--index.wxml-->
 <view class="container">
- <image src='/images/bless/di.png' class='cover' mode='aspectFill'></image>
-    <view wx:if="{{chatNum > 0}}">
+ <image src='http://f.zxlmzs.com/img/20220418/540dd7de31c946889cc580eb8b2924af/di.png' class='cover' mode='aspectFill'></image>
+ <view wx:if="{{!state }}" class="chat_list">
+  <text>
+    这里写满了对婚礼的祝福
+  </text>
+ </view>
+    <view wx:if="{{state }}">
       <view class="chat_list" wx:for="{{chatList}}" wx:key="user">
-        <view class="chat_face">
-          <image src="{{item.face}}" />
+        <view class="chat_face" wx:if="{{ item.avatarUrl}}">
+          <image  src="{{item.avatarUrl}}" />
         </view>
         <view class="chat_words">
           <view class="chat_meta">
-            <text class="chat_user">{{item.nickname}} </text>
+            <text class="chat_user">{{item.name ||item.nickName}} </text>
             <text class="chat_date fr">{{item.createTime}}</text>
           </view>
-          <view>{{item.words}}</view>
+          <view>{{item.say}}</view>
         </view>
       </view>
     </view>
@@ -20,7 +25,7 @@
         <!-- <image src="/images/lovemail.gif" /> -->
       </view>
     </view>
-    <view class='btn_area'>
+    <view class='btn_area' wx:if="{{state}}">
       <image wx:if="{{!msgSta}}" src='/images/bless/bi.png' class="imgbtn" bindtap="leaveMsg"></image>
     </view>
 

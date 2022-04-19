@@ -10,6 +10,14 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+
+  onShareAppMessage: function() {
+    return {
+      title: '张鑫&李昂 婚礼邀请函',
+      path: 'pages/index/index',
+      imageUrl: 'http://f.zxlmzs.com/img/20220418/02136f89232247b3bec63ee9e77afb66/shareImg.jpg'
+    }
+  },
   //事件处理函数
   markertap(e) {
     var lng = "117.82747219999315"

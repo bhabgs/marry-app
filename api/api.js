@@ -1,11 +1,18 @@
-// const host = 'http://192.168.0.109:1002'
-const host = 'https://shizihuihui.cn'
-const photo = host + '/wedding/getPhotos'
-const getbless = host + '/wedding/getBless'
-const sendbless = host + '/wedding/sendBless'
-const getMusic = host + '/wedding/getMusicUrl'
-const loginWX = host +'/wechatApi/login'
+// const host = 'http://192.168.9.75:3000'
+const host = "https://docs.bhabgs.com/marryApi";
+const photo = host + "/photos";
+const getbless = host + "/getnumb";
+const sendbless = host + "/numb";
+const music = host + "/music";
+const login = host + "/login";
+const createUser = host + "/createUser";
 
 module.exports = {
-  host, photo, getbless,sendbless,getMusic,loginWX
-}
+  host,
+  photo,
+  getbless,
+  sendbless,
+  music,
+  login,
+  createUser
+};

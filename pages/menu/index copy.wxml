@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="swiper">
+    <swiper indicator-dots="true" indicator-active-color="rgb(245, 212, 158)" interval="3500" duration="500" autoplay="true" :vertical="false" circular="true">
+      <swiper-item wx:for="{{picList}}" wx:key="slide" wx:id="id" wx:if="{{item}}">
+        <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

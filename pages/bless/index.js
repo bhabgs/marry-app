@@ -18,25 +18,58 @@ Page({
     auth: false,
     msgSta: false,
     signSta: false,
-    come:false
+    come:false,
+    chatNum: 50,
+    chatList: [
+      {}
+    ],
+    state: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this
-    let userInfo = wx.getStorageSync('userInfo')
-    let openId = wx.getStorageSync('openId')
-    if (userInfo && openId) {
+      const userInfo = wx.getStorageSync('userInfo');
       this.setData({
-        auth: true,
-        userInfo: userInfo,
-        openId:openId
-      })
-    }
- 
+        userInfo: userInfo
+      });
+      wx.request({
+        url: api.host + '/state/',
+        success: (res) => {
+          this.setData({
+            state: res.data
+          })
+          if (res.data) {
+              this.getBless();
+          }
+        }
+      });
+  },
 
+  onShareAppMessage: function() {
+    return {
+      title: '张鑫&李昂 婚礼邀请函',
+      path: 'pages/index/index',
+      imageUrl: 'http://f.zxlmzs.com/img/20220418/02136f89232247b3bec63ee9e77afb66/shareImg.jpg'
+    }
+  },
+
+  getBless: function() {
+    const that = this;
+    wx.request({
+      url: api.getbless,
+      success(res) {
+        that.setData({
+          chatList: res.data.users.filter((item) => item.say != '')
+        })
+      }
+    })
+  },
+  cumpuntedChat: function() {
+
+  },
+  bindgetuserinfo: function(e) {
   },
   leaveMsg: function() {
     this.setData({
@@ -88,8 +121,59 @@ Page({
  
   },
 
-
+ setbless: function() {
+  const {nickName, gender, avatarUrl, openId} = this.data.userInfo;
+  wx.request({
+    url:  api.sendbless,
+    method: 'POST',
+     data: {
+      openId,
+       nickName, gender, avatarUrl,
+       name: this.data.name,
+       num: this.data.num,
+       number: this.data.tel,
+       say: this.data.inputValue
+     },
+     success:(res) =>{
+       this.getBless();
+       this.setData({
+         name: '',
+         num: '',
+         tel: '',
+         inputValue: '',
+         msgSta: false
+       });
+       wx.showToast({
+         title: '上传成功',
+         icon: 'none'
+       })
+     }
+  })
+ },
   foo: function(e) {
-    console.log(e);
+   
+    // console.log(this.data.inputValue, this.data.name,this.data.tel,this.data.num);
+
+    if (!this.data.name || !this.data.tel || !this.data.num) {
+      wx.showModal({
+        title: '表单填写成功',
+        success: (res) => {
+          if (res.confirm) {
+            // 确认
+            this.setbless();
+          } else if (res.cancel) {
+            // 取消
+            wx.showToast({
+              title: '取消提交操作',
+              icon: 'none'
+            })
+          }
+        }
+      })
+    } else {
+      this.setbless();
+    }
+
+   
   }
 })

@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <image src='/images/map/di.png' class='cover' mode='aspectFill'></image>
+  <image src='http://f.zxlmzs.com/img/20220418/cdf8fea401144a0fa9a372ea23f52bcd/di.png' class='cover' mode='aspectFill'></image>
   <view class='dateArea'>
     <text class="text-data">
       2022-05-05
