@@ -12,6 +12,12 @@
       天津市宁河区芦台春生态园-桃花厅
     </text>
   <view class="redtop"></view>
+ <radio-group class="radio-group" bindchange="manNumSelect">
+ <label for="" class="radio-click c" wx:for="{{items}}">
+  <text>{{item.value}}</text>
+  <radio class="radio" color="#09f" value="{{item.value}}" checked="{{item.checked}}"></radio>
+ </label>
+ </radio-group>
   <!-- <view class="mapdetail"> -->
   <map class="mapdetail" longitude="{{lng}}" latitude="{{lat}}" scale="18" controls="{{controls}}" markers="{{markers}}" bindmarkertap="markertap" show-location ></map>
   <!-- </view> -->

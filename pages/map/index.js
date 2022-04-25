@@ -8,9 +8,43 @@ Page({
     dds: '婚礼已经开始啦',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    lng: '117.82747219999315',
+    lat: '39.30546027391144',
+    name: "芦台春生态园",
+    address: "天津市宁河区芦台春生态园 ",
+    items: [
+      {value: '酒店位置', checked: true, location: {
+        lng: '117.82747219999315',
+        lat: '39.30546027391144',
+        name: '芦台春生态园',
+        address: "天津市宁河区芦台春生态园 ",
+      }},
+      {value: '新郎家', location: {
+        lng: '117.86248362653727',
+        lat: '39.418955512178925',
+        name: '新郎家',
+        address: "天津市宁河区小茄庄一区二排十三号 ",
+      }}
+    ]
   },
-
+  manNumSelect: function(e) {
+    const v = this.data.items.find(item => item.value == e.detail.value);
+    this.setData({
+      lat: v.location.lat,
+      lng: v.location.lng,
+      name: v.location.name,
+        address:  v.location.address,
+      markers: [{
+        iconPath: "/images/map/location.png",
+        id: 0,
+        latitude: v.location.lat, // 页面初始化 options为页面跳转所带来的参数 
+        longitude: v.location.lng,
+        width: 22,
+        height: 31
+      }],
+    });
+  },
   onShareAppMessage: function() {
     return {
       title: '张鑫&李昂 婚礼邀请函',
@@ -20,32 +54,24 @@ Page({
   },
   //事件处理函数
   markertap(e) {
-    var lng = "117.82747219999315"
-    var lat = "39.30546027391144"
     wx.openLocation({
-      latitude: parseFloat(lat),
-      longitude: parseFloat(lng),
+      latitude: parseFloat(this.data.lat),
+      longitude: parseFloat(this.data.lng),
       scale: 18,
-      name: "芦台春生态园",
-      address: "天津市宁河区芦台春生态园 "
+      name: this.data.name,
+      address: this.data.address
     })
   },
   onLoad: function () {
-    var that = this
     //地图信息
-    var lng = "117.82747219999315"
-    var lat = "39.30546027391144"
-
-    // var lng = res.data.mainInfo.lng
-    // var lat = res.data.mainInfo.lat
-    that.setData({
-      lng: lng, // 全局属性，用来取定位坐标
-      lat: lat,
+    this.setData({
+      // lng: this.data.lng, // 全局属性，用来取定位坐标
+      // lat: this.data.lat,
       markers: [{
         iconPath: "/images/map/location.png",
         id: 0,
-        latitude: lat, // 页面初始化 options为页面跳转所带来的参数 
-        longitude: lng,
+        latitude: this.data.lat, // 页面初始化 options为页面跳转所带来的参数 
+        longitude: this.data.lng,
         width: 22,
         height: 31
       }],
