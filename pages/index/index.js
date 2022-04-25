@@ -12,6 +12,13 @@ Page({
     loginState: true,
     openId: ''
   },
+  onShareTimeline: function() {
+    return {
+      itle: '张鑫&李昂 婚礼邀请函',
+      query: 'pages/index/index',
+      imageUrl: 'http://f.zxlmzs.com/img/20220418/02136f89232247b3bec63ee9e77afb66/shareImg.jpg'
+    }
+  },
   onShareAppMessage: function() {
     return {
       title: '张鑫&李昂 婚礼邀请函',
